@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Clicker-peli</title>
+<meta charset="UTF-8">
+
+<style>
+#mopo {
+    display: none;
+}
+</style>
+
+</head>
+
+<body>
+
+   <button onclick="klikkaus()">The FitnessGram™ Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets faster each minute after you hear this signal. [beep] A single lap should be completed each time you hear this sound. [ding] Remember to run in a straight line, and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on the word start. On your mark, get ready, start.</button>
+
+   <button id="mopo">Osta mopo</button>
+   
+   <div id="klikit"></div>
+
+   <script>
+   
+   var laskuri = 0;
+   var kerroin = 1;
+
+    function klikkaus(){
+        laskuri = laskuri + 1 * kerroin;
+        console.log('Pisteet: ' + laskuri);
+        tulosta();
+        teeJotain();
+    }
+
+    function teeJotain(){
+        if (laskuri >= 10) {
+            document.getElementById('mopo').style.display = "block";
+        }
+    }
+
+
+    function tulosta(){
+        console.log(laskuri);
+        document.getElementById('klikit').innerHTML = laskuri;
+    }   
+   </script>
+
+
+</body>
+
+</html>
