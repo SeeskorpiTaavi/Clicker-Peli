@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 
 <style>
-#mopo {
+#työntekijä {
     display: none;
 }
 </style>
@@ -14,35 +14,83 @@
 
 <body>
 
-   <button onclick="klikkaus()">The FitnessGram™ Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets faster each minute after you hear this signal. [beep] A single lap should be completed each time you hear this sound. [ding] Remember to run in a straight line, and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on the word start. On your mark, get ready, start.</button>
+   <button onclick="klikkaus()">Click</button>
 
-   <button id="mopo">Osta mopo</button>
+   <button onclick="lisaaTyontekija()">Palkkaa työntekijä</button> Cost: 25 (Klikkaukset nousee +1)
+
+   <button onclick="lisaaKaivuri()">Vuokraa kaivuri</button> Cost: 200 (Klikkaukset nousee +5)
    
    <div id="klikit"></div>
+
+   <p id="ker"></p>
+
+   <p id="kaivuri"></p>
+
+   <p id="laskenta"></p>
+
+   <button onclick="lisaaMaansiirtotyokalu()">Vuokraa Maansiirtotyökalu</button> Cost: 1000 (Klikkaus per sekunti nousee +2)
+
 
    <script>
    
    var laskuri = 0;
    var kerroin = 1;
+   var kaivuri = 0;
+   var tyoukko = 1;
+   var timerId;
+   var laskenta = document.getElementById('laskenta');
 
     function klikkaus(){
-        laskuri = laskuri + 1 * kerroin;
+        laskuri += 1 * kerroin;
         console.log('Pisteet: ' + laskuri);
         tulosta();
-        teeJotain();
     }
 
-    function teeJotain(){
-        if (laskuri >= 10) {
-            document.getElementById('mopo').style.display = "block";
+    function lisaaTyontekija(){
+        if (laskuri >= 25) {
+            console.log("Palkkasit röiukon!");
+            laskuri = laskuri-25;
+            tyoukko++;
+            kerroin++;
+            tulosta();
+            console.log('Työukot: ' + kerroin);
         }
     }
+    
+        function lisaaKaivuri(){
+        if (laskuri >= 200) {
+            console.log("Vuokrasit kaivurin!");
+            laskuri = laskuri-200;
+            kerroin=kerroin+5;
+            kaivuri++;
+            tulosta();
+            console.log('Kaivurit: ' + kerroin);
+        }
+    }
+
+        function aloita(){
+            timerId = setInterval(laske, 1000); 
+        }
+
+        function laske(){
+            laskuri = laskuri + 1 * tyoukko * 2;
+            laskuri++;
+            laskenta.innerHTML = laskuri;
+        }
+
+        function osta(){
+            tyoukko++;
+        }
 
 
     function tulosta(){
         console.log(laskuri);
         document.getElementById('klikit').innerHTML = laskuri;
-    }   
+        document.getElementById('ker').innerHTML = "Työntekijöitä: " + tyoukko;
+        document.getElementById('kaivuri').innerHTML = "Kaivurit: " + kaivuri;
+        document.getElementById('laskenta').innerHTML = "Maansiirtokoneet: " + 
+}
+    
    </script>
 
 
