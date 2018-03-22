@@ -4,12 +4,6 @@
 <title>Clicker-peli</title>
 <meta charset="UTF-8">
 
-<style>
-#työntekijä {
-    display: none;
-}
-</style>
-
 </head>
 
 <body>
@@ -28,8 +22,9 @@
 
    <p id="laskenta"></p>
 
-   <button onclick="lisaaMaansiirtotyokalu()">Vuokraa Maansiirtotyökalu</button> Cost: 1000 (Klikkaus per sekunti nousee +2)
+   <p id="timerId"></p>
 
+   <button onclick="lisaaMaansiirtotyokalu()">Vuokraa Maansiirtotyökalu</button> Cost: 1000 (Klikkaus per sekunti nousee +2)
 
    <script>
    
@@ -53,25 +48,24 @@
             tyoukko++;
             kerroin++;
             tulosta();
-            console.log('Työukot: ' + kerroin);
+            console.log('röiukot: ' + kerroin);
         }
     }
-    
+
         function lisaaKaivuri(){
-        if (laskuri >= 200) {
-            console.log("Vuokrasit kaivurin!");
-            laskuri = laskuri-200;
-            kerroin=kerroin+5;
-            kaivuri++;
-            tulosta();
-            console.log('Kaivurit: ' + kerroin);
-        }
-    }
+            if (laskuri >= 200) {
+                console.log("Vuokrasit kaivurin!");
+                laskuri = laskuri-200;
+                kerroin=kerroin+5;
+                kaivuri++;
+                tulosta();
+                console.log('Kaivurit: ' + kerroin);
+         }
+     }
 
         function aloita(){
             timerId = setInterval(laske, 1000); 
         }
-
         function laske(){
             laskuri = laskuri + 1 * tyoukko * 2;
             laskuri++;
@@ -82,15 +76,23 @@
             tyoukko++;
         }
 
+        function lisaaMaansiirtotyokalu(){
+            if (laskuri >= 1000) {
+                console.log("Vuokrasit maansiirtotyökalun!")
+                laskuri = laskuri-1000;
 
+            }
+        }
+        
     function tulosta(){
         console.log(laskuri);
         document.getElementById('klikit').innerHTML = laskuri;
         document.getElementById('ker').innerHTML = "Työntekijöitä: " + tyoukko;
         document.getElementById('kaivuri').innerHTML = "Kaivurit: " + kaivuri;
-        document.getElementById('laskenta').innerHTML = "Maansiirtokoneet: " + 
+        document.getElementById('laskenta').innerHTML = "Maansiirtokoneet: " + timerId; 
 }
     
+
    </script>
 
 
