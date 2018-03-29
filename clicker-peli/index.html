@@ -3,45 +3,50 @@
 <head>
 <title>Clicker-peli</title>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
 
 <body>
 
-   <button onclick="klikkaus()">Click</button> <br><br>
+    <button onclick="klikkaus()">Click</button> <br><br>
 
-   <button onclick="lisaaTyontekija()">Palkkaa röiukko</button> Cost: 25 (Klikkaukset nousee +1) <br><br>
+    <button onclick="lisaaMaansiirtotyokalu()">Vuokraa maansiirtotyökalu</button> <p1>Hinta: 75 (Klikkaus per sekunti nousee +2) </p1>
+    
+    <br><br>
 
-   <button onclick="lisaaKaivuri()">Vuokraa kaivuri</button> Cost: 200 (Klikkaukset nousee +5)
-   
-   <div id="klikit"></div>
+    <button onclick="lisaaMetsatyokone()">Vuokraa mehtäkone </button> <p1>Hinta: 300 (Klikkaus per sekunti nousee +5)</p1> <br><br>
+    
+        <div id="klikit"></div>
 
-   <p id="ker"></p>
+        <p id="metsatyokone"></p>
 
-   <p id="kaivuri"></p>
+        <p id="kaivuri"></p>
 
-   <p id="laskenta"></p>
+        <p id="ker"></p>
 
-   <p id="timerId"></p>
+        <p id="laskenta"></p>
 
-   <p id="metsatyokone"></p>
+        <p id="timerId"></p>
 
-   <button onclick="lisaaMaansiirtotyokalu()">Vuokraa maansiirtotyökalu</button> Cost: 1000 (Klikkaus per sekunti nousee +2) 
-   
-   <br><br>
+    
 
-   <button onclick="lisaaMetsatyokone()">Vuokraa mehtäkone </button> Cost: 3000 (Klikkaus per sekunti nousee +5)
+    <button onclick="lisaaTyontekija()">Palkkaa röiukko</button> <p1>Hinta: 500 (Klikkaukset nousee +1)</p1> 
+    
+    <br><br>
 
-   <script>
-   
-   var laskuri = 3000;
-   var kerroin = 1;
-   var kaivuri = 0;
-   var tyoukko = 1;
-   var maansiirtokone = 0;
-   var metsatyokone = 0;
-   var timerId;
-   var laskenta = document.getElementById('laskenta');
+    <button onclick="lisaaKaivuri()">Vuokraa kaivuri</button> <p1>Hinta: 1000 (Klikkaukset nousee +5)</p1>
+
+    <script>
+    
+    var laskuri = 0;
+    var kerroin = 1;
+    var kaivuri = 0;
+    var tyoukko = 1;
+    var maansiirtokone = 0;
+    var metsatyokone = 0;
+    var timerId;
+    var laskenta = document.getElementById('laskenta');
 
     function klikkaus(){
         laskuri += 1 * kerroin;
@@ -51,9 +56,9 @@
     }
 
     function lisaaTyontekija(){
-        if (laskuri >= 25) {
+        if (laskuri >= 500) {
             console.log("Palkkasit röiukon!");
-            laskuri = laskuri-25;
+            laskuri = laskuri-500;
             tyoukko++;
             kerroin++;
             tulosta();
@@ -62,9 +67,9 @@
     }
 
         function lisaaKaivuri(){
-            if (laskuri >= 200) {
+            if (laskuri >= 1000) {
                 console.log("Vuokrasit kaivurin!");
-                laskuri = laskuri-200;
+                laskuri = laskuri-1000;
                 kerroin=kerroin+5;
                 kaivuri++;
                 tulosta();
@@ -86,9 +91,9 @@
         }
 
         function lisaaMaansiirtotyokalu(){
-            if (laskuri >= 1000) {
+            if (laskuri >= 75) {
                 console.log("Vuokrasit maansiirtotyökalun!")
-                laskuri = laskuri-1000;
+                laskuri = laskuri-75;
                 maansiirtokone++;
                 tulosta();
                 if (timerId) {
@@ -100,11 +105,14 @@
         }
 
         function lisaaMetsatyokone(){
-            if (laskuri >= 3000) {
+            if (laskuri >= 300) {
                 console.log("Vuokrasit metsätyökoneen!")
-                laskuri = laskuri-3000;
+                laskuri = laskuri-300;
                 metsatyokone++;
                 tulosta();
+                if (timerId) {
+                    return;
+                }
                 aloita();
                
             }
@@ -115,7 +123,8 @@
         document.getElementById('klikit').innerHTML = laskuri;
         document.getElementById('ker').innerHTML = "Työntekijöitä: " + tyoukko;
         document.getElementById('kaivuri').innerHTML = "Kaivurit: " + kaivuri;
-        document.getElementById('laskenta').innerHTML = "Maansiirtokoneet: " + maansiirtokone; 
+        document.getElementById('laskenta').innerHTML = "Maansiirtokoneet: " + maansiirtokone;
+        document.getElementById('metsatyokone').innerHTML = "Mehtäkoneet: " + metsatyokone;
 }
     
 
